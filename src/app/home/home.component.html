@@ -1,0 +1,104 @@
+
+<div class="toolbar" role="banner">
+    <div class="d-flex justify-content-between">
+      <div style="float:left;">
+        <span style="padding-left: 20px; font-size: xx-large;">Test App</span>
+      </div>
+      <div class="render-drop">
+        <div ngbDropdown class="d-inline-block">
+            <button class="btn btn-info" id="dd1" ngbDropdownToggle>
+              <span class="bigScreen">Menu</span>
+              <span class="smallScreen"><i class="fa fa-bars"></i></span>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dd1">
+              <button ngbDropdownItem>Menu - 1</button>
+              <button ngbDropdownItem>Menu - 2</button>
+              <button ngbDropdownItem>Menu - 3</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="content" role="main" *ngIf="userCount > 0">
+    <strong>Showing {{userCount}} Records</strong>
+    <div class="card-container">
+      <div *ngFor="let user of users">
+        <div class="card mx-auto" style="overflow: auto;" >
+          <div class="card-body">
+            <app-user
+              (click) = "openModal(content, user)"
+              [user]=user
+            ></app-user>
+            <div style="float: right; margin-top: 10px">
+              <button class="btn btn-danger" (click)="deleteUser(user.id)"><i class="bi bi-trash"></i>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content" role="main" *ngIf="userCount === 0">
+    <strong>No Users To Display</strong>
+  </div>
+
+  <!-- User Details Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">User Details</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container">
+        <div class="row">
+            <strong>Id: </strong> {{selectedUser.id}}
+        </div>
+        <div class="row">
+            <strong>Name: </strong>{{selectedUser.name}}
+        </div>
+        <div class="row">
+            <strong>UserName: </strong> {{selectedUser.username}}
+        </div>
+        <div class="row">
+            <strong>Email: </strong>{{selectedUser.email}}
+        </div>
+    
+        <div class="row">
+            <strong>Address </strong>
+        </div>
+        <div class="row">
+            <strong class="paddingLeft">Street: </strong>{{selectedUser.address.street}}
+        </div>
+        <div class="row">
+            <strong class="paddingLeft">Suite: </strong>{{selectedUser.address.suite}}
+        </div>
+        <div class="row">
+            <strong class="paddingLeft">City: </strong>{{selectedUser.address.city}}
+        </div>
+        <div class="row">
+            <strong class="paddingLeft">Zip Code: </strong>{{selectedUser.address.zipcode}}
+        </div>
+        <div class="row">
+            <strong class="paddingLeft">Geo </strong>
+        </div>
+        <div class="row">
+            <strong class="paddingLeftTwo">Latitude: </strong>{{selectedUser.address.geo.lat}}
+        </div>
+        <div class="row">
+            <strong class="paddingLeftTwo">Longitude: </strong>{{selectedUser.address.geo.lng}}
+        </div>
+        <div class="row">
+            <strong >Phone: </strong>{{selectedUser.phone}}
+        </div>
+        <div class="row">
+            <strong>Website: </strong>{{selectedUser.website}}
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close Popup')">Close</button>
+    </div>
+  </ng-template>
+  

@@ -1,0 +1,12 @@
+.scroll {
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.paddingLeft{
+    padding-left: 10px;
+}
+
+.paddingLeftTwo{
+    padding-left: 20px;
+}
